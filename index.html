@@ -17,7 +17,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: var(--cream-bg); color: var(--text-dark); font-family: 'Playfair Display', serif; overflow-x: hidden; }
         
-        /* Font Consistency across all headers and labels */
+        /* Unified Font Branding */
         h1, h2, h3, .announcement, .btn-whatsapp, .cat-item p { 
             font-family: 'Cinzel', serif; 
         }
@@ -37,7 +37,6 @@
         .cat-item { text-align: center; cursor: pointer; border: none; background: none; flex-shrink: 0; }
         .cat-circle { width: 85px; height: 85px; border-radius: 50%; border: 2px solid var(--kerala-red); margin: 0 auto 12px; overflow: hidden; transition: 0.4s; background: white; padding: 3px; }
         .cat-circle img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-        /* Label styling to match branding */
         .cat-item p { font-size: 0.8rem; font-weight: 700; color: var(--kerala-red); text-transform: uppercase; letter-spacing: 1px; }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
@@ -72,7 +71,7 @@
 
     <header>
         <a href="#" onclick="filterCategory('All')">
-            <img src="assets/images/logo.jpg" alt="SREECRAFT Logo" class="logo-img">
+            <img src="assets/images/logo.png" alt="SREECRAFT Logo" class="logo-img">
         </a>
         <div class="social-icons">
             <a href="https://www.instagram.com/nettipattam_sree.craft?igsh=N3VtMnp2bm5kcjM5" target="_blank"><i class="fa-brands fa-instagram"></i></a>
@@ -116,7 +115,7 @@
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 const navHtml = p.images.length > 1 ? `<button class="nav-btn prev" onclick="event.stopPropagation(); changeImg(${globalIndex}, -1)"><i class="fa-solid fa-chevron-left"></i></button><button class="nav-btn next" onclick="event.stopPropagation(); changeImg(${globalIndex}, 1)"><i class="fa-solid fa-chevron-right"></i></button>` : '';
-                card.innerHTML = `<div class="img-container" onclick="openLightbox('${p.images[p.currentIdx]}')">${navHtml}<img src="${p.images[p.currentIdx]}" class="product-img" id="img-${globalIndex}"></div><div class="product-info"><h3 class="product-name">${p.name}</h3><p class="product-price">${p.price}</p></div><a href="https://wa.me/${WHATSAPP_NUM}?text=Hello SREECRAFT, I am interested in ${p.name}" target="_blank" class="btn-whatsapp">ORDER VIA WHATSAPP</a>`;
+                card.innerHTML = `<div class="img-container" onclick="openLightbox('${p.images[p.currentIdx]}')">${navHtml}<img src="${p.images[p.currentIdx]}" class="product-img" id="img-${globalIndex}"></div><div class="product-info"><h3 class="product-name">${p.name}</h3><p class="product-price">${p.price}</p></div><a href="https://wa.me/${WHATSAPP_NUM}?text=Hello Sreecraft, I am interested in ${p.name}" target="_blank" class="btn-whatsapp">ORDER VIA WHATSAPP</a>`;
                 grid.appendChild(card);
             });
         }
