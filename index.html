@@ -3,119 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SREECRAFTS | Kerala Handicrafts</title>
+    <title>SREECRAFT | Kerala Handicrafts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary-gold: #C6A24A;
-            --temple-red: #6E0F1A;
+            --kerala-red: #6E0F1A; 
             --cream-bg: #F4EFE6;
             --white: #ffffff;
+            --text-dark: #1a1a1a;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: var(--cream-bg); color: #333; overflow-x: hidden; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background-color: var(--cream-bg); 
+            color: var(--text-dark); 
+            font-family: 'Playfair Display', serif;
+            overflow-x: hidden; 
+        }
+
+        h1, h2, h3, .logo, .announcement, .btn-whatsapp { 
+            font-family: 'Cinzel', serif; 
+        }
 
         /* Announcement Bar */
         .announcement {
-            background-color: var(--primary-gold);
-            color: var(--temple-red);
+            background-color: var(--kerala-red);
+            color: #fff;
             text-align: center;
             padding: 10px;
-            font-weight: bold;
-            font-size: 0.8rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         /* Header */
         header {
             background: var(--white);
-            padding: 15px 5%;
+            padding: 20px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
         }
-        .logo { font-size: 1.6rem; font-weight: 900; color: var(--temple-red); text-decoration: none; }
-        .logo span { color: var(--primary-gold); }
+        .logo { 
+            font-size: 1.8rem; 
+            font-weight: 900; 
+            color: var(--kerala-red); 
+            text-decoration: none; 
+            letter-spacing: 3px; 
+        }
+        
+        .social-icons { display: flex; gap: 25px; }
+        .social-icons a { color: var(--kerala-red); font-size: 1.4rem; transition: 0.3s; text-decoration: none; }
+        .social-icons a:hover { transform: translateY(-3px); opacity: 0.8; }
 
-        /* Category Navigation with Images */
+        /* TAG Banner Section */
+        .hero-banner {
+            width: 100%;
+            background: var(--white);
+            display: flex;
+            justify-content: center;
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(110, 15, 26, 0.1);
+        }
+        .hero-banner img {
+            max-width: 90%;
+            height: auto;
+        }
+
+        /* Category Navigation */
         .categories {
             display: flex;
             overflow-x: auto;
-            padding: 25px 5%;
-            gap: 20px;
+            padding: 40px 5%;
+            gap: 30px;
             scrollbar-width: none;
-            justify-content: start;
+            justify-content: center;
         }
-        .cat-item { min-width: 85px; text-align: center; cursor: pointer; border: none; background: none; }
+        .cat-item { text-align: center; cursor: pointer; border: none; background: none; flex-shrink: 0; }
         .cat-circle {
-            width: 70px; height: 70px; border-radius: 50%;
-            border: 3px solid var(--primary-gold);
-            margin: 0 auto 8px; overflow: hidden;
-            transition: 0.3s;
+            width: 85px; height: 85px; border-radius: 50%;
+            border: 2px solid var(--kerala-red);
+            margin: 0 auto 12px; overflow: hidden;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            background: white;
+            padding: 3px;
         }
-        .cat-circle img { width: 100%; height: 100%; object-fit: cover; }
-        .cat-item:hover .cat-circle { transform: scale(1.1); border-color: var(--temple-red); }
-        .cat-item p { font-size: 0.75rem; font-weight: 700; color: var(--temple-red); }
+        .cat-circle img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+        .cat-item:hover .cat-circle { transform: scale(1.1); box-shadow: 0 8px 20px rgba(110, 15, 26, 0.2); }
+        .cat-item p { font-size: 0.8rem; font-weight: 700; color: var(--kerala-red); text-transform: uppercase; letter-spacing: 1px; }
 
         /* Product Grid */
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
         }
 
-        /* Card & Manual Slider */
+        /* Card Style */
         .product-card {
-            background: var(--white); border-radius: 12px; overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column;
-            position: relative;
+            background: var(--white); border-radius: 0px; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            display: flex; flex-direction: column;
+            position: relative; transition: 0.4s;
+            border: 1px solid transparent;
         }
-        .img-container { width: 100%; height: 320px; position: relative; background: #000; }
-        .product-img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.4s; }
+        .product-card:hover { transform: translateY(-10px); border-color: var(--kerala-red); }
 
-        /* Slider Controls */
+        .img-container { width: 100%; height: 380px; position: relative; background: #fdfcfb; }
+        .product-img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease-in-out; }
+
         .nav-btn {
             position: absolute; top: 50%; transform: translateY(-50%);
-            background: rgba(0,0,0,0.5); color: white; border: none;
-            padding: 12px 8px; cursor: pointer; border-radius: 4px; z-index: 10;
+            background: rgba(255,255,255,0.9); color: var(--kerala-red); border: none;
+            width: 40px; height: 40px; cursor: pointer; z-index: 10;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .nav-btn:hover { background: var(--primary-gold); }
-        .prev { left: 5px; }
-        .next { right: 5px; }
+        .prev { left: 10px; }
+        .next { right: 10px; }
 
-        .product-info { padding: 15px; flex-grow: 1; text-align: center; }
-        .product-name { font-size: 1.1rem; color: var(--temple-red); margin-bottom: 5px; }
-        .product-price { font-weight: bold; color: #1F5B34; font-size: 1.2rem; }
+        .product-info { padding: 25px; flex-grow: 1; text-align: center; }
+        .product-name { font-size: 1.3rem; color: #000; margin-bottom: 10px; letter-spacing: 1px; }
+        .product-price { font-style: italic; color: var(--kerala-red); font-size: 1.1rem; }
 
         .btn-whatsapp {
-            background: var(--primary-gold); color: white; text-decoration: none;
-            padding: 12px; margin: 0 15px 15px; border-radius: 8px;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            font-weight: bold; transition: 0.3s;
+            background: var(--kerala-red); color: white; text-decoration: none;
+            padding: 18px; margin: 0 25px 25px; text-align: center;
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            font-weight: 700; font-size: 0.9rem; letter-spacing: 2px;
+            transition: 0.3s;
         }
-        .btn-whatsapp:hover { background: var(--temple-red); }
+        .btn-whatsapp:hover { background: #4d0a12; letter-spacing: 3px; }
 
-        footer { text-align: center; padding: 40px; color: #777; font-size: 0.8rem; }
+        footer { text-align: center; padding: 60px 20px; color: #555; font-size: 0.85rem; background: #fff; border-top: 1px solid #eee; letter-spacing: 1px; }
+        
+        /* Smooth Scroll */
+        html { scroll-behavior: smooth; }
     </style>
 </head>
 <body>
 
-    <div class="announcement">Spirit of Kerala in your Homes</div>
+    <div class="announcement">Bring the Spirit of Kerala to your Homes</div>
 
     <header>
-        <a href="#" class="logo" onclick="filterCategory('All')">SREE<span>CRAFTS</span></a>
-        <i class="fa-solid fa-cart-shopping" style="color: var(--temple-red);"></i>
+        <a href="#" class="logo" onclick="filterCategory('All')">SREECRAFT</a>
+        
+        <div class="social-icons">
+            <a href="https://www.instagram.com/nettipattam_sree.craft?igsh=N3VtMnp2bm5kcjM5" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.facebook.com/sree.craft/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+        </div>
     </header>
+
+    <div class="hero-banner">
+        <img src="assets/images/TAG.png" alt="SREECRAFT Banner">
+    </div>
 
     <div class="categories">
         <button class="cat-item" onclick="filterCategory('All')">
-            <div class="cat-circle"><i class="fa-solid fa-border-all" style="margin-top:22px"></i></div>
-            <p>Show All</p>
+            <div class="cat-circle" style="display:flex; align-items:center; justify-content:center; color:var(--kerala-red)">
+                <i class="fa-solid fa-house"></i>
+            </div>
+            <p>Home</p>
         </button>
         <button class="cat-item" onclick="filterCategory('Nettipattom')">
             <div class="cat-circle"><img src="assets/images/nettipattom_1.jpeg"></div>
@@ -139,18 +195,17 @@
         <div class="product-grid" id="productGrid"></div>
     </div>
 
-    <footer>&copy; 2026 SREECRAFTS Kerala | +91 7306732328</footer>
+    <footer>&copy; 2026 SREECRAFT KERALA | TRADITIONAL CRAFTSMANSHIP</footer>
 
     <script>
         const WHATSAPP_NUM = "917306732328";
 
-        // Your specific file names mapped to categories
         const products = [
             {
                 id: "NT-STD",
                 name: "Premium Nettipattom",
                 category: "Nettipattom",
-                price: "₹2,500 - ₹15,000",
+                price: "Tradition in every thread",
                 images: ["assets/images/nettipattom_1.jpeg", "assets/images/nettipattom_2.jpeg", "assets/images/nettipattom_3.jpeg", "assets/images/nettipattom_4.jpeg", "assets/images/nettipattom_5.jpeg", "assets/images/nettipattom_6.jpeg", "assets/images/nettipattom_7.jpeg", "assets/images/nettipattom_8.jpeg", "assets/images/nettipattom_9.jpeg", "assets/images/nettipattom_10.jpeg", "assets/images/nettipattom_11.jpeg", "assets/images/nettipattom_12.jpeg", "assets/images/nettipattom_13.jpeg"],
                 currentIdx: 0
             },
@@ -158,7 +213,7 @@
                 id: "NT-MINI",
                 name: "Miniature Nettipattom",
                 category: "Nettipattom",
-                price: "₹550",
+                price: "Sacred Elegance",
                 images: ["assets/images/mininettipattom_1.jpeg", "assets/images/mininettipattom_2.jpeg", "assets/images/mininettipattom_3.jpeg"],
                 currentIdx: 0
             },
@@ -166,7 +221,7 @@
                 id: "TH-TRAD",
                 name: "Traditional Thidambu",
                 category: "Thidambu",
-                price: "₹1,800",
+                price: "The Artisan's Dedication",
                 images: ["assets/images/thidambu_1.jpeg", "assets/images/thidambu_2.jpeg", "assets/images/thidambu_3.jpeg", "assets/images/thidambu_4.jpeg"],
                 currentIdx: 0
             },
@@ -174,7 +229,7 @@
                 id: "PF-HERI",
                 name: "Heritage Photo Frame",
                 category: "Frames",
-                price: "₹850",
+                price: "Capture the Legacy",
                 images: ["assets/images/foto_1.jpeg", "assets/images/foto_2.jpeg"],
                 currentIdx: 0
             },
@@ -182,7 +237,7 @@
                 id: "CH-KRLA",
                 name: "Traditional Chaarth",
                 category: "Chaarth",
-                price: "₹1,200",
+                price: "Handmade Soul",
                 images: ["assets/images/charth_1.jpeg"],
                 currentIdx: 0
             }
@@ -191,57 +246,52 @@
         function renderProducts(filter = 'All') {
             const grid = document.getElementById('productGrid');
             grid.innerHTML = '';
-
             const filtered = filter === 'All' ? products : products.filter(p => p.category === filter);
 
-            filtered.forEach((p, pIdx) => {
+            filtered.forEach((p) => {
+                const globalIndex = products.indexOf(p);
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 
-                // Show arrows only if more than 1 image
                 const navHtml = p.images.length > 1 ? `
-                    <button class="nav-btn prev" onclick="changeImg(${products.indexOf(p)}, -1)"><i class="fa-solid fa-chevron-left"></i></button>
-                    <button class="nav-btn next" onclick="changeImg(${products.indexOf(p)}, 1)"><i class="fa-solid fa-chevron-right"></i></button>
+                    <button class="nav-btn prev" onclick="changeImg(${globalIndex}, -1)"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="nav-btn next" onclick="changeImg(${globalIndex}, 1)"><i class="fa-solid fa-chevron-right"></i></button>
                 ` : '';
 
                 card.innerHTML = `
                     <div class="img-container">
                         ${navHtml}
-                        <img src="${p.images[p.currentIdx]}" class="product-img" id="img-${products.indexOf(p)}">
+                        <img src="${p.images[p.currentIdx]}" class="product-img" id="img-${globalIndex}">
                     </div>
                     <div class="product-info">
                         <h3 class="product-name">${p.name}</h3>
                         <p class="product-price">${p.price}</p>
                     </div>
-                    <a href="https://wa.me/${WHATSAPP_NUM}?text=Hi SREECRAFTS, I am interested in ${p.name}" 
+                    <a href="https://wa.me/${WHATSAPP_NUM}?text=Hello SREECRAFT, I am interested in ${p.name}" 
                        target="_blank" class="btn-whatsapp">
-                        <i class="fa-brands fa-whatsapp"></i> Order on WhatsApp
+                        ORDER ON WHATSAPP
                     </a>
                 `;
                 grid.appendChild(card);
             });
         }
 
-        // Manual Switch Function
         window.changeImg = function(pIdx, direction) {
             const p = products[pIdx];
             p.currentIdx = (p.currentIdx + direction + p.images.length) % p.images.length;
-            
             const imgEl = document.getElementById(`img-${pIdx}`);
-            imgEl.style.opacity = '0.5';
+            imgEl.style.opacity = '0';
             setTimeout(() => {
                 imgEl.src = p.images[p.currentIdx];
                 imgEl.style.opacity = '1';
-            }, 150);
+            }, 250);
         };
 
-        // Filter Logic
         window.filterCategory = function(cat) {
             renderProducts(cat);
-            window.scrollTo({ top: 300, behavior: 'smooth' });
+            window.scrollTo({ top: 450, behavior: 'smooth' });
         };
 
-        // Initial Load
         renderProducts();
     </script>
 </body>
