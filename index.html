@@ -23,7 +23,7 @@
             overflow-x: hidden; 
         }
 
-        h1, h2, h3, .logo, .announcement, .btn-whatsapp { 
+        h1, h2, h3, .announcement, .btn-whatsapp { 
             font-family: 'Cinzel', serif; 
         }
 
@@ -42,7 +42,7 @@
         /* Header */
         header {
             background: var(--white);
-            padding: 20px 5%;
+            padding: 10px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -51,12 +51,21 @@
             z-index: 1000;
             box-shadow: 0 2px 15px rgba(0,0,0,0.08);
         }
-        .logo { 
-            font-size: 1.8rem; 
-            font-weight: 900; 
-            color: var(--kerala-red); 
-            text-decoration: none; 
-            letter-spacing: 3px; 
+
+        /* Updated Logo Styles */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .logo-img {
+            height: 60px; /* Adjusted for the elephant logo */
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+        .logo-container:hover .logo-img {
+            transform: scale(1.05);
         }
         
         .social-icons { display: flex; gap: 25px; }
@@ -145,7 +154,6 @@
 
         footer { text-align: center; padding: 60px 20px; color: #555; font-size: 0.85rem; background: #fff; border-top: 1px solid #eee; letter-spacing: 1px; }
         
-        /* Smooth Scroll */
         html { scroll-behavior: smooth; }
     </style>
 </head>
@@ -154,7 +162,9 @@
     <div class="announcement">Bring the Spirit of Kerala to your Homes</div>
 
     <header>
-        <a href="#" class="logo" onclick="filterCategory('All')">SREECRAFT</a>
+        <a href="#" class="logo-container" onclick="filterCategory('All')">
+            <img src="assets/images/logo.png" alt="SREECRAFT Logo" class="logo-img">
+        </a>
         
         <div class="social-icons">
             <a href="https://www.instagram.com/nettipattam_sree.craft?igsh=N3VtMnp2bm5kcjM5" target="_blank"><i class="fa-brands fa-instagram"></i></a>
