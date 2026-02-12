@@ -7,104 +7,105 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --kerala-red: #6E0F1A; --cream-bg: #F4EFE6; --white: #ffffff; --text-dark: #1a1a1a; }
+        :root {
+            --kerala-red: #6E0F1A; 
+            --cream-bg: #F4EFE6;
+            --white: #ffffff;
+            --text-dark: #1a1a1a;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: var(--cream-bg); color: var(--text-dark); font-family: 'Playfair Display', serif; overflow-x: hidden; }
-        h1, h2, h3, .announcement, .btn-whatsapp { font-family: 'Cinzel', serif; }
+        
+        /* Font Consistency across all headers and labels */
+        h1, h2, h3, .announcement, .btn-whatsapp, .cat-item p { 
+            font-family: 'Cinzel', serif; 
+        }
+
         .announcement { background-color: var(--kerala-red); color: #fff; text-align: center; padding: 10px; font-weight: 700; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; }
+
         header { background: var(--white); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 15px rgba(0,0,0,0.08); }
         .logo-img { height: 85px; width: auto; transition: transform 0.3s ease; cursor: pointer; }
+        
         .social-icons { display: flex; gap: 25px; }
         .social-icons a { color: var(--kerala-red); font-size: 1.4rem; transition: 0.3s; text-decoration: none; }
+
         .hero-banner { width: 100%; background: var(--white); display: flex; justify-content: center; padding: 30px 0; border-bottom: 1px solid rgba(110, 15, 26, 0.1); }
         .hero-banner img { max-width: 90%; height: auto; }
+
         .categories { display: flex; overflow-x: auto; padding: 40px 5%; gap: 30px; scrollbar-width: none; justify-content: center; }
         .cat-item { text-align: center; cursor: pointer; border: none; background: none; flex-shrink: 0; }
         .cat-circle { width: 85px; height: 85px; border-radius: 50%; border: 2px solid var(--kerala-red); margin: 0 auto 12px; overflow: hidden; transition: 0.4s; background: white; padding: 3px; }
         .cat-circle img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+        /* Label styling to match branding */
+        .cat-item p { font-size: 0.8rem; font-weight: 700; color: var(--kerala-red); text-transform: uppercase; letter-spacing: 1px; }
+
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 40px; }
         .product-card { background: var(--white); border-radius: 0px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); display: flex; flex-direction: column; position: relative; transition: 0.4s; border: 1px solid transparent; }
         .product-card:hover { transform: translateY(-10px); border-color: var(--kerala-red); }
+
         .img-container { width: 100%; height: 380px; position: relative; background: #fdfcfb; cursor: zoom-in; }
         .product-img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease-in-out; }
+
         .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); color: var(--kerala-red); border: none; width: 40px; height: 40px; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         .prev { left: 10px; } .next { right: 10px; }
+
         .product-info { padding: 25px; flex-grow: 1; text-align: center; }
         .product-name { font-size: 1.3rem; color: #000; margin-bottom: 10px; letter-spacing: 1px; }
         .product-price { font-style: italic; color: var(--kerala-red); font-size: 1.1rem; }
+
         .btn-whatsapp { background: var(--kerala-red); color: white; text-decoration: none; padding: 18px; margin: 0 25px 25px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 12px; font-weight: 700; font-size: 0.9rem; letter-spacing: 2px; transition: 0.3s; }
+
         #lightbox { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
         #lightbox img { max-width: 90%; max-height: 90%; border: 3px solid white; }
         #lightbox .close { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; }
+
         footer { text-align: center; padding: 60px 20px; color: #555; font-size: 0.85rem; background: #fff; border-top: 1px solid #eee; }
+        html { scroll-behavior: smooth; }
     </style>
 </head>
 <body>
+
     <div id="lightbox" onclick="closeLightbox()"><span class="close">&times;</span><img id="lightbox-img" src=""></div>
     <div class="announcement">Bring the Spirit of Kerala to your Homes</div>
+
     <header>
-        <a href="#" class="logo-container" onclick="filterCategory('All')"><img src="assets/images/logo.png" alt="SREECRAFT Logo" class="logo-img"></a>
+        <a href="#" onclick="filterCategory('All')">
+            <img src="assets/images/logo.jpg" alt="SREECRAFT Logo" class="logo-img">
+        </a>
         <div class="social-icons">
             <a href="https://www.instagram.com/nettipattam_sree.craft?igsh=N3VtMnp2bm5kcjM5" target="_blank"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://www.facebook.com/sree.craft/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
         </div>
     </header>
-    <div class="hero-banner"><img src="assets/images/TAG.png" alt="SREECRAFT Banner"></div>
-    <div class="categories" id="catNav"></div>
+
+    <div class="hero-banner">
+        <img src="assets/images/TAG.png" alt="SREECRAFT Banner">
+    </div>
+
+    <div class="categories">
+        <button class="cat-item" onclick="filterCategory('All')"><div class="cat-circle" style="display:flex; align-items:center; justify-content:center; color:var(--kerala-red)"><i class="fa-solid fa-house"></i></div><p>Home</p></button>
+        <button class="cat-item" onclick="filterCategory('Nettipattom')"><div class="cat-circle"><img src="assets/images/nettipattom_1.jpeg"></div><p>Nettipattom</p></button>
+        <button class="cat-item" onclick="filterCategory('Thidambu')"><div class="cat-circle"><img src="assets/images/thidambu_1.jpeg"></div><p>Thidambu</p></button>
+        <button class="cat-item" onclick="filterCategory('Frames')"><div class="cat-circle"><img src="assets/images/foto_1.jpeg"></div><p>Frames</p></button>
+        <button class="cat-item" onclick="filterCategory('Chaarth')"><div class="cat-circle"><img src="assets/images/charth_1.jpeg"></div><p>Chaarth</p></button>
+    </div>
+
     <div class="container"><div class="product-grid" id="productGrid"></div></div>
-    <footer>&copy; 2026 SREECRAFT KERALA</footer>
+
+    <footer>&copy; 2026 SREECRAFT KERALA </footer>
 
     <script>
-        const WHATSAPP_NUM = "917306732328";
-        
-        // Configuration: Just add the base name and folder here
-        const config = [
-            { id: "NT-STD", name: "Premium Nettipattom", category: "Nettipattom", baseName: "nettipattom", price: "Tradition in every thread" },
-            { id: "NT-MINI", name: "Miniature Nettipattom", category: "Nettipattom", baseName: "mininettipattom", price: "Sacred Elegance" },
-            { id: "TH-TRAD", name: "Traditional Thidambu", category: "Thidambu", baseName: "thidambu", price: "The Artisan's Dedication" },
-            { id: "PF-HERI", name: "Heritage Photo Frame", category: "Frames", baseName: "foto", price: "Capture the Legacy" },
-            { id: "CH-KRLA", name: "Traditional Chaarth", category: "Chaarth", baseName: "charth", price: "Handmade Soul" }
+        const WHATSAPP_NUM = "919846296752";
+
+        const products = [
+            { id: "NT-STD", name: "Premium Nettipattom", category: "Nettipattom", price: "Tradition in every thread", images: ["assets/images/nettipattom_1.jpeg", "assets/images/nettipattom_2.jpeg", "assets/images/nettipattom_3.jpeg", "assets/images/nettipattom_4.jpeg", "assets/images/nettipattom_5.jpeg", "assets/images/nettipattom_6.jpeg", "assets/images/nettipattom_7.jpeg", "assets/images/nettipattom_8.jpeg", "assets/images/nettipattom_9.jpeg", "assets/images/nettipattom_10.jpeg", "assets/images/nettipattom_11.jpeg", "assets/images/nettipattom_12.jpeg", "assets/images/nettipattom_13.jpeg"], currentIdx: 0 },
+            { id: "NT-MINI", name: "Miniature Nettipattom", category: "Nettipattom", price: "Sacred Elegance", images: ["assets/images/mininettipattom_1.jpeg", "assets/images/mininettipattom_2.jpeg", "assets/images/mininettipattom_3.jpeg"], currentIdx: 0 },
+            { id: "TH-TRAD", name: "Traditional Thidambu", category: "Thidambu", price: "The Artisan's Dedication", images: ["assets/images/thidambu_1.jpeg", "assets/images/thidambu_2.jpeg", "assets/images/thidambu_3.jpeg", "assets/images/thidambu_4.jpeg"], currentIdx: 0 },
+            { id: "PF-HERI", name: "Heritage Photo Frame", category: "Frames", price: "Capture the Legacy", images: ["assets/images/foto_1.jpeg", "assets/images/foto_2.jpeg"], currentIdx: 0 },
+            { id: "CH-KRLA", name: "Traditional Chaarth", category: "Chaarth", price: "Handmade Soul", images: ["assets/images/charth_1.jpeg"], currentIdx: 0 }
         ];
-
-        let products = [];
-
-        // ELI5: This function scans for images automatically based on numbers
-        async function autoScanImages() {
-            for (let item of config) {
-                let foundImages = [];
-                let i = 1;
-                let searching = true;
-
-                while (searching && i < 50) { // Limit to 50 images per product to be safe
-                    let testPath = `assets/images/${item.baseName}_${i}.jpeg`;
-                    try {
-                        let response = await fetch(testPath, { method: 'HEAD' });
-                        if (response.ok) {
-                            foundImages.push(testPath);
-                            i++;
-                        } else { searching = false; }
-                    } catch (e) { searching = false; }
-                }
-
-                if (foundImages.length > 0) {
-                    products.push({ ...item, images: foundImages, currentIdx: 0 });
-                }
-            }
-            renderCategories();
-            renderProducts();
-        }
-
-        function renderCategories() {
-            const nav = document.getElementById('catNav');
-            const uniqueCats = [...new Set(products.map(p => p.category))];
-            let html = `<button class="cat-item" onclick="filterCategory('All')"><div class="cat-circle" style="display:flex; align-items:center; justify-content:center; color:var(--kerala-red)"><i class="fa-solid fa-house"></i></div><p>Home</p></button>`;
-            uniqueCats.forEach(cat => {
-                const firstImg = products.find(p => p.category === cat).images[0];
-                html += `<button class="cat-item" onclick="filterCategory('${cat}')"><div class="cat-circle"><img src="${firstImg}"></div><p>${cat}</p></button>`;
-            });
-            nav.innerHTML = html;
-        }
 
         function renderProducts(filter = 'All') {
             const grid = document.getElementById('productGrid');
@@ -115,7 +116,7 @@
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 const navHtml = p.images.length > 1 ? `<button class="nav-btn prev" onclick="event.stopPropagation(); changeImg(${globalIndex}, -1)"><i class="fa-solid fa-chevron-left"></i></button><button class="nav-btn next" onclick="event.stopPropagation(); changeImg(${globalIndex}, 1)"><i class="fa-solid fa-chevron-right"></i></button>` : '';
-                card.innerHTML = `<div class="img-container" onclick="openLightbox('${p.images[p.currentIdx]}')">${navHtml}<img src="${p.images[p.currentIdx]}" class="product-img" id="img-${globalIndex}"></div><div class="product-info"><h3 class="product-name">${p.name}</h3><p class="product-price">${p.price}</p></div><a href="https://wa.me/${WHATSAPP_NUM}?text=Hello SREECRAFT, I am interested in ${p.name}" target="_blank" class="btn-whatsapp">ORDER ON WHATSAPP</a>`;
+                card.innerHTML = `<div class="img-container" onclick="openLightbox('${p.images[p.currentIdx]}')">${navHtml}<img src="${p.images[p.currentIdx]}" class="product-img" id="img-${globalIndex}"></div><div class="product-info"><h3 class="product-name">${p.name}</h3><p class="product-price">${p.price}</p></div><a href="https://wa.me/${WHATSAPP_NUM}?text=Hello SREECRAFT, I am interested in ${p.name}" target="_blank" class="btn-whatsapp">ORDER VIA WHATSAPP</a>`;
                 grid.appendChild(card);
             });
         }
@@ -131,8 +132,7 @@
         window.openLightbox = function(src) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox').style.display = 'flex'; };
         window.closeLightbox = function() { document.getElementById('lightbox').style.display = 'none'; };
         window.filterCategory = function(cat) { renderProducts(cat); window.scrollTo({ top: 450, behavior: 'smooth' }); };
-        
-        autoScanImages();
+        renderProducts();
     </script>
 </body>
 </html>
