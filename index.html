@@ -8,15 +8,13 @@
     <style>
         :root {
             --primary-gold: #C6A24A;
-            --highlight-gold: #E0C068;
             --temple-red: #6E0F1A;
-            --forest-green: #1F5B34;
             --cream-bg: #F4EFE6;
             --white: #ffffff;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: var(--cream-bg); color: #333; }
+        body { background-color: var(--cream-bg); color: #333; overflow-x: hidden; }
 
         /* Announcement Bar */
         .announcement {
@@ -25,8 +23,6 @@
             text-align: center;
             padding: 10px;
             font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             font-size: 0.8rem;
         }
 
@@ -42,52 +38,64 @@
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .logo { font-size: 1.6rem; font-weight: 900; color: var(--temple-red); }
+        .logo { font-size: 1.6rem; font-weight: 900; color: var(--temple-red); text-decoration: none; }
         .logo span { color: var(--primary-gold); }
 
-        /* Categories */
+        /* Category Navigation with Images */
         .categories {
             display: flex;
             overflow-x: auto;
             padding: 25px 5%;
             gap: 20px;
             scrollbar-width: none;
+            justify-content: start;
         }
-        .cat-item { min-width: 90px; text-align: center; cursor: pointer; }
+        .cat-item { min-width: 85px; text-align: center; cursor: pointer; border: none; background: none; }
         .cat-circle {
             width: 70px; height: 70px; border-radius: 50%;
-            background: var(--white); border: 2px solid var(--primary-gold);
-            margin: 0 auto 8px; display: flex; align-items: center; justify-content: center;
-            transition: 0.3s; color: var(--temple-red); font-size: 1.2rem;
+            border: 3px solid var(--primary-gold);
+            margin: 0 auto 8px; overflow: hidden;
+            transition: 0.3s;
         }
-        .cat-item p { font-size: 0.75rem; font-weight: 600; color: var(--temple-red); }
+        .cat-circle img { width: 100%; height: 100%; object-fit: cover; }
+        .cat-item:hover .cat-circle { transform: scale(1.1); border-color: var(--temple-red); }
+        .cat-item p { font-size: 0.75rem; font-weight: 700; color: var(--temple-red); }
 
-        /* Product Card & Fade Animation */
+        /* Product Grid */
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
         }
+
+        /* Card & Manual Slider */
         .product-card {
             background: var(--white); border-radius: 12px; overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column;
+            position: relative;
         }
-        .img-container {
-            width: 100%; height: 300px; background: #eee; overflow: hidden; position: relative;
+        .img-container { width: 100%; height: 320px; position: relative; background: #000; }
+        .product-img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.4s; }
+
+        /* Slider Controls */
+        .nav-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(0,0,0,0.5); color: white; border: none;
+            padding: 12px 8px; cursor: pointer; border-radius: 4px; z-index: 10;
         }
-        .product-img {
-            width: 100%; height: 100%; object-fit: cover;
-            transition: opacity 1s ease-in-out; /* The Fade Effect */
-        }
-        .product-info { padding: 20px; flex-grow: 1; text-align: center; }
-        .product-name { font-size: 1.1rem; color: var(--temple-red); margin-bottom: 8px; }
-        .product-price { font-weight: bold; color: var(--forest-green); font-size: 1.2rem; }
+        .nav-btn:hover { background: var(--primary-gold); }
+        .prev { left: 5px; }
+        .next { right: 5px; }
+
+        .product-info { padding: 15px; flex-grow: 1; text-align: center; }
+        .product-name { font-size: 1.1rem; color: var(--temple-red); margin-bottom: 5px; }
+        .product-price { font-weight: bold; color: #1F5B34; font-size: 1.2rem; }
 
         .btn-whatsapp {
             background: var(--primary-gold); color: white; text-decoration: none;
-            padding: 15px; margin: 0 20px 20px; border-radius: 8px;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
+            padding: 12px; margin: 0 15px 15px; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
             font-weight: bold; transition: 0.3s;
         }
         .btn-whatsapp:hover { background: var(--temple-red); }
@@ -100,102 +108,141 @@
     <div class="announcement">Spirit of Kerala in your Homes</div>
 
     <header>
-        <div class="logo">SREE<span>CRAFTS</span></div>
-        <i class="fa-solid fa-bars" style="color: var(--temple-red);"></i>
+        <a href="#" class="logo" onclick="filterCategory('All')">SREE<span>CRAFTS</span></a>
+        <i class="fa-solid fa-cart-shopping" style="color: var(--temple-red);"></i>
     </header>
 
     <div class="categories">
-        <div class="cat-item"><div class="cat-circle"><i class="fa-solid fa-sun"></i></div><p>Nettipattom</p></div>
-        <div class="cat-item"><div class="cat-circle"><i class="fa-solid fa-om"></i></div><p>Thidambu</p></div>
-        <div class="cat-item"><div class="cat-circle"><i class="fa-solid fa-image"></i></div><p>Frames</p></div>
-        <div class="cat-item"><div class="cat-circle"><i class="fa-solid fa-leaf"></i></div><p>Chaarth</p></div>
+        <button class="cat-item" onclick="filterCategory('All')">
+            <div class="cat-circle"><i class="fa-solid fa-border-all" style="margin-top:22px"></i></div>
+            <p>Show All</p>
+        </button>
+        <button class="cat-item" onclick="filterCategory('Nettipattom')">
+            <div class="cat-circle"><img src="assets/images/nettipattom_1.jpeg"></div>
+            <p>Nettipattom</p>
+        </button>
+        <button class="cat-item" onclick="filterCategory('Thidambu')">
+            <div class="cat-circle"><img src="assets/images/thidambu_1.jpeg"></div>
+            <p>Thidambu</p>
+        </button>
+        <button class="cat-item" onclick="filterCategory('Frames')">
+            <div class="cat-circle"><img src="assets/images/foto_1.jpeg"></div>
+            <p>Frames</p>
+        </button>
+        <button class="cat-item" onclick="filterCategory('Chaarth')">
+            <div class="cat-circle"><img src="assets/images/charth_1.jpeg"></div>
+            <p>Chaarth</p>
+        </button>
     </div>
 
     <div class="container">
         <div class="product-grid" id="productGrid"></div>
     </div>
 
-    <footer>&copy; 2026 SREECRAFTS Kerala</footer>
+    <footer>&copy; 2026 SREECRAFTS Kerala | +91 7306732328</footer>
 
     <script>
-        const WHATSAPP_NUM = "919042525110";
+        const WHATSAPP_NUM = "917306732328";
 
+        // Your specific file names mapped to categories
         const products = [
             {
-                id: "NT-PREM",
+                id: "NT-STD",
                 name: "Premium Nettipattom",
+                category: "Nettipattom",
                 price: "₹2,500 - ₹15,000",
-                images: ["assets/images/nettipattom_1.jpeg", "assets/images/nettipattom_2.jpeg", "assets/images/nettipattom_3.jpeg", "assets/images/nettipattom_4.jpeg", "assets/images/nettipattom_5.jpeg", "assets/images/nettipattom_6.jpeg", "assets/images/nettipattom_7.jpeg", "assets/images/nettipattom_8.jpeg", "assets/images/nettipattom_9.jpeg", "assets/images/nettipattom_10.jpeg", "assets/images/nettipattom_11.jpeg", "assets/images/nettipattom_12.jpeg", "assets/images/nettipattom_13.jpeg"]
+                images: ["assets/images/nettipattom_1.jpeg", "assets/images/nettipattom_2.jpeg", "assets/images/nettipattom_3.jpeg", "assets/images/nettipattom_4.jpeg", "assets/images/nettipattom_5.jpeg", "assets/images/nettipattom_6.jpeg", "assets/images/nettipattom_7.jpeg", "assets/images/nettipattom_8.jpeg", "assets/images/nettipattom_9.jpeg", "assets/images/nettipattom_10.jpeg", "assets/images/nettipattom_11.jpeg", "assets/images/nettipattom_12.jpeg", "assets/images/nettipattom_13.jpeg"],
+                currentIdx: 0
             },
             {
                 id: "NT-MINI",
                 name: "Miniature Nettipattom",
+                category: "Nettipattom",
                 price: "₹550",
-                images: ["assets/images/mininettipattom_1.jpeg", "assets/images/mininettipattom_2.jpeg", "assets/images/mininettipattom_3.jpeg"]
+                images: ["assets/images/mininettipattom_1.jpeg", "assets/images/mininettipattom_2.jpeg", "assets/images/mininettipattom_3.jpeg"],
+                currentIdx: 0
             },
             {
                 id: "TH-TRAD",
                 name: "Traditional Thidambu",
+                category: "Thidambu",
                 price: "₹1,800",
-                images: ["assets/images/thidambu_1.jpeg", "assets/images/thidambu_2.jpeg", "assets/images/thidambu_3.jpeg", "assets/images/thidambu_4.jpeg"]
+                images: ["assets/images/thidambu_1.jpeg", "assets/images/thidambu_2.jpeg", "assets/images/thidambu_3.jpeg", "assets/images/thidambu_4.jpeg"],
+                currentIdx: 0
             },
             {
                 id: "PF-HERI",
                 name: "Heritage Photo Frame",
+                category: "Frames",
                 price: "₹850",
-                images: ["assets/images/foto_1.jpeg", "assets/images/foto_2.jpeg"]
+                images: ["assets/images/foto_1.jpeg", "assets/images/foto_2.jpeg"],
+                currentIdx: 0
             },
             {
                 id: "CH-KRLA",
                 name: "Traditional Chaarth",
+                category: "Chaarth",
                 price: "₹1,200",
-                images: ["assets/images/charth_1.jpeg"]
+                images: ["assets/images/charth_1.jpeg"],
+                currentIdx: 0
             }
         ];
 
-        function renderProducts() {
+        function renderProducts(filter = 'All') {
             const grid = document.getElementById('productGrid');
-            grid.innerHTML = products.map((p, index) => `
-                <div class="product-card" data-index="${index}">
+            grid.innerHTML = '';
+
+            const filtered = filter === 'All' ? products : products.filter(p => p.category === filter);
+
+            filtered.forEach((p, pIdx) => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                
+                // Show arrows only if more than 1 image
+                const navHtml = p.images.length > 1 ? `
+                    <button class="nav-btn prev" onclick="changeImg(${products.indexOf(p)}, -1)"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="nav-btn next" onclick="changeImg(${products.indexOf(p)}, 1)"><i class="fa-solid fa-chevron-right"></i></button>
+                ` : '';
+
+                card.innerHTML = `
                     <div class="img-container">
-                        <img src="${p.images[0]}" class="product-img" id="img-${index}">
+                        ${navHtml}
+                        <img src="${p.images[p.currentIdx]}" class="product-img" id="img-${products.indexOf(p)}">
                     </div>
                     <div class="product-info">
                         <h3 class="product-name">${p.name}</h3>
                         <p class="product-price">${p.price}</p>
                     </div>
-                    <a href="https://wa.me/${WHATSAPP_NUM}?text=Hi SREECRAFTS, I am interested in ${p.name} (${p.id})" 
+                    <a href="https://wa.me/${WHATSAPP_NUM}?text=Hi SREECRAFTS, I am interested in ${p.name}" 
                        target="_blank" class="btn-whatsapp">
                         <i class="fa-brands fa-whatsapp"></i> Order on WhatsApp
                     </a>
-                </div>
-            `).join('');
-        }
-
-        function startSlideshows() {
-            const intervals = {};
-            products.forEach((p, index) => {
-                if (p.images.length > 1) {
-                    let currentImgIdx = 0;
-                    setInterval(() => {
-                        const imgElement = document.getElementById(`img-${index}`);
-                        currentImgIdx = (currentImgIdx + 1) % p.images.length;
-                        
-                        // Fade Out
-                        imgElement.style.opacity = 0;
-                        
-                        setTimeout(() => {
-                            imgElement.src = p.images[currentImgIdx];
-                            // Fade In
-                            imgElement.style.opacity = 1;
-                        }, 1000); // Wait for fade out to finish before switching src
-                    }, 7000); // 7 Seconds
-                }
+                `;
+                grid.appendChild(card);
             });
         }
 
+        // Manual Switch Function
+        window.changeImg = function(pIdx, direction) {
+            const p = products[pIdx];
+            p.currentIdx = (p.currentIdx + direction + p.images.length) % p.images.length;
+            
+            const imgEl = document.getElementById(`img-${pIdx}`);
+            imgEl.style.opacity = '0.5';
+            setTimeout(() => {
+                imgEl.src = p.images[p.currentIdx];
+                imgEl.style.opacity = '1';
+            }, 150);
+        };
+
+        // Filter Logic
+        window.filterCategory = function(cat) {
+            renderProducts(cat);
+            window.scrollTo({ top: 300, behavior: 'smooth' });
+        };
+
+        // Initial Load
         renderProducts();
-        startSlideshows();
     </script>
 </body>
 </html>
