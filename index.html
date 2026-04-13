@@ -17,7 +17,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: var(--cream-bg); color: var(--text-dark); font-family: 'Playfair Display', serif; overflow-x: hidden; }
         
-        /* Unified Font Branding */
         h1, h2, h3, .announcement, .btn-whatsapp, .cat-item p { 
             font-family: 'Cinzel', serif; 
         }
@@ -99,7 +98,38 @@
         const WHATSAPP_NUM = "919846296752";
 
         const products = [
-            { id: "NT-STD", name: "Premium Nettipattom", category: "Nettipattom", price: "Tradition in every thread", images: ["assets/images/nettipattom_1.jpeg", "assets/images/nettipattom_2.jpeg", "assets/images/nettipattom_3.jpeg", "assets/images/nettipattom_4.jpeg", "assets/images/nettipattom_5.jpeg", "assets/images/nettipattom_6.jpeg", "assets/images/nettipattom_7.jpeg", "assets/images/nettipattom_8.jpeg", "assets/images/nettipattom_9.jpeg", "assets/images/nettipattom_10.jpeg", "assets/images/nettipattom_11.jpeg", "assets/images/nettipattom_12.jpeg", "assets/images/nettipattom_13.jpeg"], currentIdx: 0 },
+            { 
+                id: "NT-STD", 
+                name: "Premium Nettipattom", 
+                category: "Nettipattom", 
+                price: "Tradition in every thread", 
+                images: [
+                    "assets/images/nettipattom_17.jpeg", // Start with 17 as requested
+                    "assets/images/nettipattom_1.jpeg", 
+                    "assets/images/nettipattom_2.jpeg", 
+                    "assets/images/nettipattom_3.jpeg", 
+                    "assets/images/nettipattom_4.jpeg", 
+                    "assets/images/nettipattom_5.jpeg", 
+                    "assets/images/nettipattom_6.jpeg", 
+                    "assets/images/nettipattom_7.jpeg", 
+                    "assets/images/nettipattom_8.jpeg", 
+                    "assets/images/nettipattom_9.jpeg", 
+                    "assets/images/nettipattom_10.jpeg", 
+                    "assets/images/nettipattom_11.jpeg", 
+                    "assets/images/nettipattom_12.jpeg", 
+                    "assets/images/nettipattom_13.jpeg",
+                    "assets/images/nettipattom_14.jpeg",
+                    "assets/images/nettipattom_15.jpeg",
+                    "assets/images/nettipattom_16.jpeg",
+                    "assets/images/nettipattom_18.jpeg",
+                    "assets/images/nettipattom_19.jpeg",
+                    "assets/images/nettipattom_20.jpeg",
+                    "assets/images/nettipattom_21.jpeg",
+                    "assets/images/nettipattom_22.jpeg",
+                    "assets/images/nettipattom_23.jpeg"
+                ], 
+                currentIdx: 0 
+            },
             { id: "NT-MINI", name: "Miniature Nettipattom", category: "Nettipattom", price: "Sacred Elegance", images: ["assets/images/mininettipattom_1.jpeg", "assets/images/mininettipattom_2.jpeg", "assets/images/mininettipattom_3.jpeg"], currentIdx: 0 },
             { id: "TH-TRAD", name: "Traditional Thidambu", category: "Thidambu", price: "The Artisan's Dedication", images: ["assets/images/thidambu_1.jpeg", "assets/images/thidambu_2.jpeg", "assets/images/thidambu_3.jpeg", "assets/images/thidambu_4.jpeg"], currentIdx: 0 },
             { id: "PF-HERI", name: "Heritage Photo Frame", category: "Frames", price: "Capture the Legacy", images: ["assets/images/foto_1.jpeg", "assets/images/foto_2.jpeg"], currentIdx: 0 },
@@ -125,12 +155,24 @@
             p.currentIdx = (p.currentIdx + direction + p.images.length) % p.images.length;
             const imgEl = document.getElementById(`img-${pIdx}`);
             imgEl.style.opacity = '0';
-            setTimeout(() => { imgEl.src = p.images[p.currentIdx]; imgEl.parentElement.setAttribute('onclick', `openLightbox('${p.images[p.currentIdx]}')`); imgEl.style.opacity = '1'; }, 250);
+            setTimeout(() => { 
+                imgEl.src = p.images[p.currentIdx]; 
+                imgEl.parentElement.setAttribute('onclick', `openLightbox('${p.images[p.currentIdx]}')`); 
+                imgEl.style.opacity = '1'; 
+            }, 250);
         };
 
-        window.openLightbox = function(src) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox').style.display = 'flex'; };
-        window.closeLightbox = function() { document.getElementById('lightbox').style.display = 'none'; };
-        window.filterCategory = function(cat) { renderProducts(cat); window.scrollTo({ top: 450, behavior: 'smooth' }); };
+        window.openLightbox = function(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').style.display = 'flex'; 
+        };
+        window.closeLightbox = function() {
+            document.getElementById('lightbox').style.display = 'none'; 
+        };
+        window.filterCategory = function(cat) { 
+            renderProducts(cat);
+            window.scrollTo({ top: 450, behavior: 'smooth' }); 
+        };
         renderProducts();
     </script>
 </body>
